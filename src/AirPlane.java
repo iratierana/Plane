@@ -4,12 +4,38 @@ public class AirPlane implements Runnable {
 	Distributor distributor;
 	String planeId;
 	
+	/*
+	 * 
+	 * Constructor of AirPlane class.
+	 * Stablishes the distributor and the planeId.
+	 * 
+	 * @param distributor To know where to ask permissions.
+	 * @param planeId     To know which plane it is.
+	 * 
+	 */
+	
 	public AirPlane(Distributor distributor, String planeId) {
 		super();
 		this.distributor = distributor;
 		this.planeId = planeId;
 	}
 
+	
+	/*
+	 * 
+	 * To run the airplane execution simulation.
+	 * Step 1. Ask for landing lane.
+	 * Step 2. Ask for landing curve.
+	 * Step 3. Ask for terminal.
+	 * Step 4. Ask for and releases the needed intermediate lines.
+	 * Step 5. Releases terminal.
+	 * Step 6. Ask for and releases the needed intermediate lines.
+	 * Step 7. Ask for take off curve.
+	 * Step 8. Ask for take off lane.
+	 * Step 9. Releases take off lane.
+	 * 
+	 */
+	
 	@Override
 	public void run() {
 		
@@ -76,6 +102,14 @@ public class AirPlane implements Runnable {
 		
 		
 	}
+	
+	/*
+	 * 
+	 * To stop execution to simulate waitings.
+	 * 
+	 * @param time	Stop time period in ms.
+	 * 
+	 */
 	
 	private void goToBed (long time) {
 		try {
