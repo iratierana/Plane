@@ -44,7 +44,7 @@ public class AirPlane implements Runnable {
 		
 		while ((time = distributor.askForLandingLane(planeId)) > 0) {
 			
-			//goToBed(time);
+			goToBed(time);
 		
 		}
 		
@@ -76,7 +76,7 @@ public class AirPlane implements Runnable {
 		
 		System.out.println(planeId + " is resting...");
 
-		//goToBed(200);
+		goToBed(20000);
 		
 		if (!distributor.askForTermLine(acp.getTerminal(), planeId)) System.err.println("Terminal line");
 		if (!distributor.releaseTerminal(acp)) System.err.println("Release Terminal line");

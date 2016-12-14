@@ -12,7 +12,7 @@ public class Main {
 		
 		Distributor distributor = new Distributor(1);
 		
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 5; i++) {
 			Thread thread = new Thread(new AirPlane(distributor, "plane" + i));
 			thread.start();
 		}

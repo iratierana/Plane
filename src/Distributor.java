@@ -82,7 +82,7 @@ public class Distributor {
 	
 	long askForLandingLane(String planeId) {
 
-		if (!landingLane.tryAcquire()) {
+		if (!landingLane.tryAcquire()) { //intenta coger, y si no es posible se va sin coger
 			landingWaitingTime = landingWaitingTime + 1000;
 			System.out.println(planeId + " cant land, will try in " + landingWaitingTime + "ms");
 			return landingWaitingTime;
@@ -111,7 +111,7 @@ public class Distributor {
 	boolean askForLandingCurve(String planeId) {
 
 		try {
-			landingCurve.acquire();
+			landingCurve.acquire(); //intentas coger y hasta que no cojes no para
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -192,14 +192,19 @@ public class Distributor {
 		int t = acp.getTerminal();
 		int p = acp.getPosition();
 		
+		aircraftParkingLock.lock();
+		
 		for (int n = 0; n < aircraftParkings.size(); n++) {
 			if (aircraftParkings.get(n).getTerminal() == t) {
 				if (aircraftParkings.get(n).getPosition() == p) {
 					aircraftParkings.get(n).setSituation("EMPTY");
+					aircraftQueue.signalAll();
 					break;
 				}
 			}
 		}
+		
+		aircraftParkingLock.unlock();
 		
 		return true;
 	}
@@ -229,7 +234,7 @@ public class Distributor {
 			landingCurve.release();
 		}
 		
-		System.out.println(planeId + " is in landing intermediate lane nÂº " + intermediateNum);
+		System.out.println(planeId + " is in landing intermediate lane nº " + intermediateNum);
 				
 		return true;
 	}
@@ -313,7 +318,7 @@ public class Distributor {
 			e.printStackTrace();
 		}
 		
-		System.out.println(planeId + " is in take off intermediate lane nÂº " + intermediateNum);
+		System.out.println(planeId + " is in take off intermediate lane nº " + intermediateNum);
 				
 		return true;
 	}
