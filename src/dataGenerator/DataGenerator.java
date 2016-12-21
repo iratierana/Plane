@@ -95,8 +95,8 @@ public class DataGenerator {
 		return null;
 	}
 	
-	public static ArrayList<AirplanePhoto> generatePhotoListFromDatabase(){
-		//TODO Datubasera koñexiñua in,AirplanePhoto taulatik datuak atera eta hauekin lista bat sortu
+	public static ArrayList<AirplanePhoto> generateRandomPhotoList(){
+		//TODO AirplanePhoto motako lista bat sortu
 		return null;
 	}
 	
