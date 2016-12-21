@@ -66,9 +66,9 @@ public class Airplane {
 	private Integer hoursOfFlight;
 	
 	
-	@OneToMany
-	@JoinColumn(name="AIRPLANE_ID", nullable=false)
-	Collection<Flight> flightList = new ArrayList<Flight>();
+//	@OneToMany
+//	@JoinColumn(name="AIRPLANE_ID", nullable=false)
+//	Collection<Flight> flightList = new ArrayList<Flight>();
 	
 	@OneToOne
 	Airport airport;
@@ -185,13 +185,13 @@ public class Airplane {
 		this.hoursOfFlight = hoursOfFlight;
 	}
 
-	public Collection<Flight> getFlightList() {
-		return flightList;
-	}
-
-	public void setFlightList(Collection<Flight> flightList) {
-		this.flightList = flightList;
-	}
+//	public Collection<Flight> getFlightList() {
+//		return flightList;
+//	}
+//
+//	public void setFlightList(Collection<Flight> flightList) {
+//		this.flightList = flightList;
+//	}
 
 	public Airport getAirport() {
 		return airport;

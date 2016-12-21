@@ -37,6 +37,8 @@ public class PlaneGenerator {
 		//TODO airplane.setPlanePosition();
 		//TODO airplane.setPhotoList();
 		//TODO airplane.setCotrollerList();
+		//TODO airplane.setFlightList();    //Usteot hau ez dala bihar
+		//TODO airplane.setAirport();
 
 		DAOAirplane.insertAirplane(airplane);
 		

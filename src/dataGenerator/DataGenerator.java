@@ -29,23 +29,23 @@ public class DataGenerator {
 	
 	public static String generateRandomSerialNumber(){
 		int[] serialNumber = { 27090, 1236, 380, 2456, 12345, 2356, 4569, 89652, 58324 };
-		return String.valueOf(serialNumber[randInt(0, serialNumber.length)]);
+		return String.valueOf(serialNumber[randInt(0, serialNumber.length-1)]);
 	}
 	
 	public static int generateRandomLineNumber(){
 		int[] lineNumber = { 959, 468, 213, 156, 9843, 456, 789, 321, 852 };
-		return lineNumber[randInt(0, lineNumber.length)];
+		return lineNumber[randInt(0, lineNumber.length-1)];
 	}
 	
 	public static String generateRandomCurrentRegistration(){
 		String[] currentRegistration = { "G-BNLY", "G-EUPK", "G-EUYI", "D-AIQE", "N276AY" };
-		return currentRegistration[randInt(0, currentRegistration.length)];
+		return currentRegistration[randInt(0, currentRegistration.length-1)];
 
 	}
 	
 	public static String generateRandomOperatorOwner(){
 		String[] operatorOwner = { "British Airways", "American Airlines", "Austrian Airlines", "Iberia", "US Airways", "Lufthansa" };
-		return operatorOwner[randInt(0, operatorOwner.length)];
+		return operatorOwner[randInt(0, operatorOwner.length-1)];
 
 	}
 
@@ -57,7 +57,7 @@ public class DataGenerator {
 		String expectedPattern = "MM/dd/yyyy";
 		SimpleDateFormat formatter = new SimpleDateFormat(expectedPattern);
 		try {
-			String userInput = month[randInt(0, month.length)]+"/"+day[randInt(0, day.length)]+"/"+year[randInt(0, year.length)];
+			String userInput = month[randInt(0, month.length-1)]+"/"+day[randInt(0, day.length-1)]+"/"+year[randInt(0, year.length)];
 			date = formatter.parse(userInput);
 			return date;
 		} catch (ParseException e) {
@@ -69,7 +69,7 @@ public class DataGenerator {
 	
 	public static String generateRandomEngineModel(){
 		String[] engineModel = { "RB211-524H2", "V2522-A5", "PW4060", "CFM56-5B4/3", "GP7270" };	
-		return engineModel[randInt(0, engineModel.length)];
+		return engineModel[randInt(0, engineModel.length-1)];
 	}
 	
 	public static int generateRandomOursOfFlight(){

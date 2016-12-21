@@ -65,6 +65,9 @@ public class Flight {
 	@OneToOne (cascade = CascadeType.ALL)
 	Airport arriveAirport;
 	
+	@OneToOne (cascade = CascadeType.ALL)
+	Airplane airplane;
+	
 	@ManyToMany(fetch=FetchType.EAGER, mappedBy="flightList")
 	Collection<Passanger> passangerList = new ArrayList<Passanger>();
 
