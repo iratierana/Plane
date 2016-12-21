@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Random;
 
 import domain.model.AirplanePhoto;
+import domain.model.Airport;
 import domain.model.AirportController;
 import domain.model.PlanePosition;
 
@@ -101,6 +102,11 @@ public class DataGenerator {
 	
 	public static ArrayList<AirportController> generateControllerListFromDatabase(){
 		//TODO Datubasera konektau eta Airport Controller taulatik hainbat(random) controller kargau eta hauek listan kargau
+		return null;
+	}
+	
+	public static Airport generateAirportForLocationOfThePlane(){
+		//TODO Datubasera konektau eta Heathrow aireportua atera eta hauxe bueltau
 		return null;
 	}
 

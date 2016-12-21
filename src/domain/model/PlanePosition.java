@@ -29,11 +29,9 @@ public class PlanePosition {
 	private Integer planePositionId;
 	
 	@NotNull
-	private Integer position;
+	private String description;
 	
-	@NotNull
-	private Date hour;
-
+	
 	public Integer getPlanePositionId() {
 		return planePositionId;
 	}
@@ -42,22 +40,15 @@ public class PlanePosition {
 		this.planePositionId = planePositionId;
 	}
 
-	public Integer getPosition() {
-		return position;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setPosition(Integer position) {
-		this.position = position;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public Date getHour() {
-		return hour;
-	}
 
-	public void setHour(Date hour) {
-		this.hour = hour;
-	}
-	
 	
 	
 	
