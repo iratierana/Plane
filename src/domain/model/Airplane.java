@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -78,7 +77,7 @@ public class Airplane {
 	@JoinTable(name="ControlAirplane")
 	Collection<AirportController> cotrollerList= new ArrayList<AirportController>();
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne
 	PlanePosition planePosition;
 
 	
