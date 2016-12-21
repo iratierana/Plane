@@ -22,57 +22,8 @@ import domain.model.PlanePosition;
  */
 public class DAOPlanePosition {
 	
-private static Session session;
-	
-	/**
-	 * 
-	 * This function insert a plane position in the database
-	 * 
-	 * @param planePosition the plane position to insert in the database
-	 * @return true if the insert is correct
-	 * @return false if and error occurs during the insert
-	 */
-	public static boolean insertPlanePosition(PlanePosition planePosition){
-		try {
-			
-			ConnectHibernate.before();
-			session = ConnectHibernate.getSession();
-			session.getTransaction().begin();
-			session.save(planePosition); //erlazinuak itxen dianian save kendu eta persist ipinibiada eta eralazinuan cascade cascade type.persist
-			session.getTransaction().commit();
-			ConnectHibernate.after();
-			return true;
-			
-		} catch (Exception e) {
-			session.getTransaction().rollback();
-			ConnectHibernate.after();
-			return false;		
-		}
-	}
+	private static Session session;
 
-	/**
-	 * 
-	 * This function delete a plane position from the database
-	 * 
-	 * @param planePosition the plane position to delete from the database
-	 * @return true if the delete is correct
-	 * @return false if and error occurs during the delete
-	 */
-	public static boolean deletePlanePosition(PlanePosition planePosition){
-		try{
-			
-			ConnectHibernate.before();
-			session = ConnectHibernate.getSession();
-			session.delete(planePosition);
-			ConnectHibernate.after();
-			return true;
-			
-		}catch(Exception e){
-			session.getTransaction().rollback();
-			ConnectHibernate.after();
-			return false;
-		}
-	}
 	
 	
 	/**

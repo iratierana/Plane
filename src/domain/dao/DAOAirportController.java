@@ -7,7 +7,9 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 
 import configurations.ConnectHibernate;
-import domain.model.AirplanePhoto;
+import domain.model.AirportController;
+
+
 /**
  * 
  * @author Xabier Jauregi
@@ -16,37 +18,36 @@ import domain.model.AirplanePhoto;
  * @version 1.0
  * @since   2016-12-13
  * 
- * Class where are all the needed functions related with AirplanePhoto, in order to work with the database
+ * Class where are all the needed functions related with AirportController, in order to work with the database
  *  
  */
-public class DAOAirplanePhoto {
-
-
+public class DAOAirportController {
+	
 	private static Session session;
-
+	
 	
 	/**
 	 * 
-	 * This function load all the photos of the database
+	 * This function load all the airport controllers of the database
 	 * 
-	 * @return the list of photos if the load is correct
+	 * @return the list of airport controllers if the load is correct
 	 * @return null if an error occurs during the load
 	 */
-	public static List<AirplanePhoto> loadAllAirplanePhotos() {
-		List<AirplanePhoto> photoList = null;
+	public static List<AirportController> loadAllAirportControllers() {
+		List<AirportController> cotrollerList = null;
 		try {
 			ConnectHibernate.before();
 			session = ConnectHibernate.getSession();
 			@SuppressWarnings("unchecked")
-			TypedQuery<AirplanePhoto> query = session.createQuery("from AirplanePhoto");
-			photoList = query.getResultList();
+			TypedQuery<AirportController> query = session.createQuery("from AirportController");
+			cotrollerList = query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		ConnectHibernate.after();
 
 		
-		return photoList;
+		return cotrollerList;
 	}
-
+	
 }

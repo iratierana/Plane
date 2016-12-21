@@ -1,22 +1,8 @@
 package dataGenerator;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import domain.dao.DAOAirplane;
 import domain.model.Airplane;
-import domain.model.AirplanePhoto;
-import domain.model.Airport;
-import domain.model.AirportController;
-import domain.model.Direction;
-import domain.model.Flight;
-import domain.model.Passanger;
-import domain.model.PlanePosition;
-import domain.model.Runway;
 
 public class PlaneGenerator {
 
