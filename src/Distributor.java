@@ -162,6 +162,7 @@ public class Distributor {
 			
 				try {
 					aircraftQueue.await();
+					System.out.println("Parkins are full");
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
