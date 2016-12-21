@@ -57,7 +57,7 @@ public class DataGenerator {
 		String expectedPattern = "MM/dd/yyyy";
 		SimpleDateFormat formatter = new SimpleDateFormat(expectedPattern);
 		try {
-			String userInput = month[randInt(0, month.length-1)]+"/"+day[randInt(0, day.length-1)]+"/"+year[randInt(0, year.length)];
+			String userInput = month[randInt(0, month.length-1)]+"/"+day[randInt(0, day.length-1)]+"/"+year[randInt(0, year.length-1)];
 			date = formatter.parse(userInput);
 			return date;
 		} catch (ParseException e) {
