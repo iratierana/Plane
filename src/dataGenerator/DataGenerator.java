@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import domain.dao.DAOAirline;
 import domain.dao.DAOAirport;
 import domain.dao.DAOAirportController;
 import domain.dao.DAOPlanePosition;
@@ -186,13 +187,9 @@ public class DataGenerator {
 		return DAOAirport.loadAirport("Heatrhow");
 	}
 
-	public static Airline generateRandomAirline() {
-		Airline airline = new Airline();
-		String[] airlineNameList = { "British Airways", "American Airlines", "Austrian Airlines", "Iberia",
-				"US Airways", "Lufthansa" };
-		airline.setDescription("This is a airline description");
-		airline.setName(airlineNameList[randInt(0, airlineNameList.length - 1)]);
-		return airline;
+	public static Airline generateRandomAirlineFromDatabse() {
+		List<Airline> airlineList = DAOAirline.loadAllAirlines();
+		return airlineList.get(randInt(0, airlineList.size()-1));
 	}
 
 }

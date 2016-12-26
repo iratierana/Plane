@@ -25,7 +25,7 @@ public class PlaneGenerator {
 			airplane.setPhotoList(DataGenerator.generateRandomPhotoList(airplane));
 			airplane.setCotrollerList(DataGenerator.generateRandomControllerListFromDatabase());
 			airplane.setAirport(DataGenerator.generateAirportForLocationOfThePlane());
-			airplane.setAirline(DataGenerator.generateRandomAirline());
+			airplane.setAirline(DataGenerator.generateRandomAirlineFromDatabse());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
