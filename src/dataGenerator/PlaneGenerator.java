@@ -20,11 +20,11 @@ public class PlaneGenerator {
 		airplane.setStatus(true);
 		airplane.setHoursOfFlight(DataGenerator.generateRandomOursOfFlight());
 		airplane.setNumberOfFlights(DataGenerator.generateRandomNumberOfFlights());
-		//TODO airplane.setPlanePosition();
-		//TODO airplane.setPhotoList();
-		//TODO airplane.setCotrollerList();
-		//TODO airplane.setAirport();
-
+		airplane.setPlanePosition(DataGenerator.generateInitialPlanePositonFromDatabase());
+		airplane.setPhotoList(DataGenerator.generateRandomPhotoList(airplane));
+		airplane.setCotrollerList(DataGenerator.generateRandomControllerListFromDatabase());
+		airplane.setAirport(DataGenerator.generateAirportForLocationOfThePlane());
+		airplane.setAirline(DataGenerator.generateRandomAirline());
 		DAOAirplane.insertAirplane(airplane);
 		
 		System.out.println("Plane created");

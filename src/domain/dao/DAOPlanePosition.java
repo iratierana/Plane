@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 
 import configurations.ConnectHibernate;
+import domain.model.Passanger;
 import domain.model.PlanePosition;
 
 /**
@@ -24,6 +25,35 @@ public class DAOPlanePosition {
 	
 	private static Session session;
 
+	/**
+	 * Loads the plane position specified by the id
+	 * @return The  plane position
+	 */
+	@SuppressWarnings("unchecked")
+	public static PlanePosition loadPlanePosition(int id){
+		List<PlanePosition> positionList = null;
+		PlanePosition p = new PlanePosition();
+		p = null;
+		try{
+			ConnectHibernate.before();
+			session = ConnectHibernate.getSession();
+			
+			TypedQuery<PlanePosition> query = session.createQuery("from PlanePosition where planePositionId="+id);
+			positionList = query.getResultList();
+			if(!positionList.isEmpty()){
+				p=positionList.get(0);
+			}
+			ConnectHibernate.after();
+			
+		}catch (Exception e) {
+			session.getTransaction().rollback();
+			ConnectHibernate.after();
+			return null;
+		}
+		
+		ConnectHibernate.after();
+		return p;
+	}
 	
 	
 	/**

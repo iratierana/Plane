@@ -38,9 +38,9 @@ public class Airline {
 	
 	private String description;
 
-	@OneToMany
-	@JoinColumn(name="AIRLINE_ID", nullable=false)
-	Collection<Airplane> airplaneList = new ArrayList<Airplane>();
+//	@OneToMany
+//	@JoinColumn(name="AIRLINE_ID", nullable=false)
+//	Collection<Airplane> airplaneList = new ArrayList<Airplane>();
 	
 	
 	
@@ -71,13 +71,13 @@ public class Airline {
 		this.description = description;
 	}
 
-	public Collection<Airplane> getAirplaneList() {
-		return airplaneList;
-	}
-
-	public void setAirplaneList(Collection<Airplane> airplaneList) {
-		this.airplaneList = airplaneList;
-	}
+//	public Collection<Airplane> getAirplaneList() {
+//		return airplaneList;
+//	}
+//
+//	public void setAirplaneList(Collection<Airplane> airplaneList) {
+//		this.airplaneList = airplaneList;
+//	}
 
 
 }

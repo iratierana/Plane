@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -70,18 +71,29 @@ public class Airplane {
 //	@JoinColumn(name="AIRPLANE_ID", nullable=false)
 //	Collection<Flight> flightList = new ArrayList<Flight>();
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	Airport airport;
 	
-	@ManyToMany
+	@OneToOne(cascade=CascadeType.ALL)
+	Airline airline;
+	
+	public Airline getAirline() {
+		return airline;
+	}
+
+	public void setAirline(Airline airline) {
+		this.airline = airline;
+	}
+
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="ControlAirplane")
 	Collection<AirportController> cotrollerList= new ArrayList<AirportController>();
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	PlanePosition planePosition;
 
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="AIRPLANE_ID", nullable=false)
 	Collection<AirplanePhoto> photoList=new ArrayList<AirplanePhoto>();
 	

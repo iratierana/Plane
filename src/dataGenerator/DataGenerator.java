@@ -4,8 +4,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
+import domain.dao.DAOAirport;
+import domain.dao.DAOAirportController;
+import domain.dao.DAOPlanePosition;
+import domain.model.Airline;
+import domain.model.Airplane;
 import domain.model.AirplanePhoto;
 import domain.model.Airport;
 import domain.model.AirportController;
@@ -45,7 +51,7 @@ public class DataGenerator {
 	}
 	
 	public static String generateRandomOperatorOwner(){
-		String[] operatorOwner = { "British Airways", "American Airlines", "Austrian Airlines", "Iberia", "US Airways", "Lufthansa" };
+		String[] operatorOwner = { "Xabier Jauregi", "Irati Erana", "Mikel Airzmendiarrieta", "Asier Sampietro", "Joanes Plazaola", "Ane Alameda" };
 		return operatorOwner[randInt(0, operatorOwner.length-1)];
 
 	}
@@ -91,23 +97,86 @@ public class DataGenerator {
 	}
 	
 	public static PlanePosition generateInitialPlanePositonFromDatabase(){
-		//TODO Datubasera koñexiñua in eta PlanePosition taulatik hasierako posiziñua hartu
-		return null;
+		return DAOPlanePosition.loadPlanePosition(1);
 	}
 	
-	public static ArrayList<AirplanePhoto> generateRandomPhotoList(){
-		//TODO AirplanePhoto motako lista bat sortu
-		return null;
+	public static ArrayList<AirplanePhoto> generateRandomPhotoList(Airplane airplane){
+		
+		ArrayList<AirplanePhoto> photoList = new ArrayList<AirplanePhoto>();
+		AirplanePhoto airPhoto = new AirplanePhoto();
+		
+		String[] photographerName = new String[9];
+		photographerName[0] = "Annie Leibovitz";
+		photographerName[1] = "Sebastiao Salgado";
+		photographerName[2] = "Steve McCurry";
+		photographerName[3] = "James Nachtwey";
+		photographerName[4] = "David LaChapelle";
+		photographerName[5] = "Jill Greenberg";
+		photographerName[6] = "David Doubillet";
+		photographerName[7] = "Carolyn Drake";
+		photographerName[8] = "Loretta Lux";
+		
+		switch (airplane.getName()) {
+			case "Boeing 747":
+				airPhoto.setPhoto("Boeing 747.png");
+				break;
+			case "Airbus A319":
+				airPhoto.setPhoto("Airbus A319.png");		
+				break;
+			case "Airbus  A330":
+				airPhoto.setPhoto("Airbus  A330.png");		
+				break;
+			case "Boeing 767":
+				airPhoto.setPhoto("Boeing 767.png");
+				break;
+			case "Airbus A320":
+				airPhoto.setPhoto("Airbus A320.png");
+				break;
+			case "Airbur A350":
+				airPhoto.setPhoto("Airbur A350.png");
+				break;
+			case "Airbus C380":
+				airPhoto.setPhoto("Airbus C380.png");
+				break;			
+			case "Boeing 777":
+				airPhoto.setPhoto("Boeing 777.png");
+				break;
+			case "Boeing 737":
+				airPhoto.setPhoto("Boeing 737.png");
+				break;
+			default:
+				airPhoto.setPhoto("UNDEFINED");
+				break;
+		}
+				
+		airPhoto.setPhotoDate(generateRandomDate());
+		airPhoto.setPhotographer(photographerName[randInt(0, photographerName.length-1)]);
+		
+		photoList.add(airPhoto);
+		
+		return photoList;
 	}
 	
-	public static ArrayList<AirportController> generateControllerListFromDatabase(){
-		//TODO Datubasera konektau eta Airport Controller taulatik hainbat(random) controller kargau eta hauek listan kargau
-		return null;
+	public static ArrayList<AirportController> generateRandomControllerListFromDatabase(){
+		ArrayList<AirportController> controllerList = new ArrayList<AirportController>();
+		List<AirportController> allControllerList = DAOAirportController.loadAllAirportControllers();
+		for(int kont=0; kont<randInt(1, 4); kont++){
+			controllerList.add(allControllerList.get(allControllerList.size()-1));
+		}
+		return controllerList;
 	}
 	
 	public static Airport generateAirportForLocationOfThePlane(){
-		//TODO Datubasera konektau eta Heathrow aireportua atera eta hauxe bueltau
-		return null;
+		return DAOAirport.loadAirport("Heatrhow");
+	}
+	
+	@SuppressWarnings("null")
+	public static Airline generateRandomAirline(){
+		Airline airline = new Airline();
+		String[] airlineNameList = { "British Airways", "American Airlines", "Austrian Airlines", "Iberia", "US Airways", "Lufthansa" };
+		airline.setDescription("This is a airline description");
+		airline.setName(airlineNameList[randInt(0, airlineNameList.length-1)]);
+		return airline;
 	}
 
 }
