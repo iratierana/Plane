@@ -29,7 +29,7 @@ public class AirplanePhoto {
 	private Integer photoId;
 	
 	@NotNull
-	private String photo;
+	private byte[] photo;
 	
 	@NotNull
 	private Date photoDate;
@@ -45,11 +45,11 @@ public class AirplanePhoto {
 		this.photoId = photoId;
 	}
 
-	public String getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(String photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 
