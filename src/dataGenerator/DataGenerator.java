@@ -170,7 +170,6 @@ public class DataGenerator {
 		return DAOAirport.loadAirport("Heatrhow");
 	}
 	
-	@SuppressWarnings("null")
 	public static Airline generateRandomAirline(){
 		Airline airline = new Airline();
 		String[] airlineNameList = { "British Airways", "American Airlines", "Austrian Airlines", "Iberia", "US Airways", "Lufthansa" };
