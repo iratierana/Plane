@@ -1,6 +1,9 @@
 package domain.dao;
 
+import java.util.List;
+
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
 
@@ -51,17 +54,41 @@ public class DAOAirplane {
 		}
 	}
 
-	
-	public static boolean updateAirplanePosition(int planeId, PlanePosition newPlanePosition){
+	public static Airplane loadAirplane (int id){
+		List<Airplane> airplaneList = null;
+		Airplane a = new Airplane();
+		a = null;
 		try{
+			ConnectHibernate.before();
+			session = ConnectHibernate.getSession();
+			
+			@SuppressWarnings("unchecked")
+			TypedQuery<Airplane> query = session.createQuery("from Airplane where airplaneId="+id);
+			airplaneList = query.getResultList();
+			if(!airplaneList.isEmpty()){
+				a=airplaneList.get(0);
+			}
+			ConnectHibernate.after();
+			
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			ConnectHibernate.after();
+			return null;
+		}
+		
+		ConnectHibernate.after();
+		return a;
+	}
+	
+	public static boolean updateAirplanePosition(int planeId, int newPlanePositionId){
+		try{
+			PlanePosition newPlanePosition = DAOPlanePosition.loadPlanePosition(newPlanePositionId);
+			Airplane airplane = DAOAirplane.loadAirplane(planeId);
+			airplane.setPlanePosition(newPlanePosition);
 			ConnectHibernate.before();			
 			session = ConnectHibernate.getSession();
 			session.getTransaction().begin();
-			String hql="UPDATE Airplane"
-					+ " SET planePosition = "+newPlanePosition
-					+ " WHERE airplaneId = "+planeId;
-			Query query = session.createQuery(hql);
-			query.executeUpdate();
+			session.saveOrUpdate(airplane);
 			session.getTransaction().commit();	
 			return true;
 		}catch(Exception e){

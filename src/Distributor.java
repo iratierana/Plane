@@ -4,11 +4,15 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import domain.dao.DAOAirplane;
+
 public class Distributor {
 
 	int termMax = 4;
 	int aircraftParkingMax = 6;
 
+	Semaphore databaseUpdateMtx = new Semaphore(1);
+	
 	Semaphore landingLane, takeOffLane;
 	Semaphore landingCurve, takeOffCurve;
 
@@ -23,7 +27,7 @@ public class Distributor {
 
 	Long landingWaitingTime = (long) 0;
 
-	/*
+	/**
 	 * 
 	 * Constructor of Distributor class.
 	 * Initialize all the synchronization elements.
@@ -70,7 +74,7 @@ public class Distributor {
 
 	}
 
-	/*
+	/**
 	 * 
 	 * Function to ask permission to introduce to the landing lane.
 	 * The plane simulator thread will call this function.
@@ -90,14 +94,23 @@ public class Distributor {
 
 		if (landingWaitingTime > 1000)
 			landingWaitingTime = landingWaitingTime - 1000;
-
+		
+		/*--------------UPDATE POSITION IN DATABSE----------------*/
+		try {
+			databaseUpdateMtx.acquire(1);
+			DAOAirplane.updateAirplanePosition(planeId, 2);
+			databaseUpdateMtx.release(1);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		/*--------------------------------------------------------*/
 		System.out.println(planeId + " is landing...");
 
 		return 0;
 
 	}
 
-	/*
+	/**
 	 * 
 	 * Function to ask permission to introduce to the landing curve.
 	 * The plane simulator thread will call this function.
@@ -126,7 +139,7 @@ public class Distributor {
 
 	}
 
-	/*
+	/**
 	 * 
 	 * Function to ask for a gate.
 	 * The plane simulator thread will call this function.
@@ -178,7 +191,7 @@ public class Distributor {
 		
 	}
 	
-	/*
+	/**
 	 * 
 	 * Function to notify that the plane is exiting the gate.
 	 * The plane simulator thread will call this function.
@@ -210,7 +223,7 @@ public class Distributor {
 		return true;
 	}
 	
-	/*
+	/**
 	 * 
 	 * Function to ask permission to introduce to the landing intermediate line.
 	 * The plane simulator thread will call this function.
@@ -240,7 +253,7 @@ public class Distributor {
 		return true;
 	}
 	
-	/*
+	/**
 	 * 
 	 * To release the landing intermediate.
 	 * The plane simulator thread will call this function.
@@ -257,7 +270,7 @@ public class Distributor {
 		return true;
 	}
 
-	/*
+	/**
 	 * 
 	 * Function to ask permission to introduce to the terminal line.
 	 * The plane simulator thread will call this function.
@@ -283,7 +296,7 @@ public class Distributor {
 		return true;
 	}
 
-	/*
+	/**
 	 * 
 	 * Function to release the terminal line.
 	 * The plane simulator thread will call this function.
@@ -299,7 +312,7 @@ public class Distributor {
 		return true;
 	}
 	
-	/*
+	/**
 	 * 
 	 * Function to ask permission to introduce to the intermediate line.
 	 * The plane simulator thread will call this function.
@@ -324,7 +337,7 @@ public class Distributor {
 		return true;
 	}
 	
-	/*
+	/**
 	 * 
 	 * Function to release the intermediate line.
 	 * The plane simulator thread will call this function.
@@ -341,7 +354,7 @@ public class Distributor {
 		return true;
 	}
 
-	/*
+	/**
 	 * 
 	 * Function to ask permission to introduce to the take off curve.
 	 * The plane simulator thread will call this function.
@@ -368,7 +381,7 @@ public class Distributor {
 		return true;
 	}
 
-	/*
+	/**
 	 * 
 	 * Function to ask permission to introduce to the take off lane.
 	 * The plane simulator thread will call this function.
@@ -395,7 +408,7 @@ public class Distributor {
 		return true;
 	}
 	
-	/*
+	/**
 	 * 
 	 * Function to release the take off lane.
 	 * The plane simulator thread will call this function.
