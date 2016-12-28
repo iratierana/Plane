@@ -1,9 +1,12 @@
 package domain.dao;
 
+import javax.persistence.Query;
+
 import org.hibernate.Session;
 
 import configurations.ConnectHibernate;
 import domain.model.Airplane;
+import domain.model.PlanePosition;
 
 
 /**
@@ -49,5 +52,22 @@ public class DAOAirplane {
 	}
 
 	
+	public static boolean updateAirplanePosition(int planeId, PlanePosition newPlanePosition){
+		try{
+			ConnectHibernate.before();			
+			session = ConnectHibernate.getSession();
+			session.getTransaction().begin();
+			String hql="UPDATE Airplane"
+					+ " SET planePosition = "+newPlanePosition
+					+ " WHERE airplaneId = "+planeId;
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+			session.getTransaction().commit();	
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 }
