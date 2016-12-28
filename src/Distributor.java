@@ -80,7 +80,7 @@ public class Distributor {
 	 * @see			  Plane status
 	 */
 	
-	long askForLandingLane(String planeId) {
+	long askForLandingLane(int planeId) {
 
 		if (!landingLane.tryAcquire()) { //intenta coger, y si no es posible se va sin coger
 			landingWaitingTime = landingWaitingTime + 1000;
@@ -108,7 +108,7 @@ public class Distributor {
 	 * 
 	 */
 	
-	boolean askForLandingCurve(String planeId) {
+	boolean askForLandingCurve(int planeId) {
 
 		try {
 			landingCurve.acquire(); //intentas coger y hasta que no cojes no para
@@ -137,7 +137,7 @@ public class Distributor {
 	 * 
 	 */
 	
-	AircraftParking askForTerminal (String planeId) {
+	AircraftParking askForTerminal (int planeId) {
 		
 		int num = -1;
 		
@@ -222,7 +222,7 @@ public class Distributor {
 	 * 
 	 */
 	
-	boolean askForLandingIntermediate(int intermediateNum, String planeId) {
+	boolean askForLandingIntermediate(int intermediateNum, int planeId) {
 		try {
 			landInt.get(intermediateNum - 1).acquire();
 		} catch (InterruptedException e) {
@@ -269,7 +269,7 @@ public class Distributor {
 	 * 
 	 */
 	
-	boolean askForTermLine (int termNum, String planeId) {
+	boolean askForTermLine (int termNum, int planeId) {
 		try {
 			termLine.get(termNum - 1).acquire();
 		} catch (InterruptedException e) {
@@ -311,7 +311,7 @@ public class Distributor {
 	 * 
 	 */
 	
-	boolean askForToIntermediate(int intermediateNum, String planeId) {
+	boolean askForToIntermediate(int intermediateNum, int planeId) {
 		try {
 			toInt.get(intermediateNum - 1).acquire();
 		} catch (InterruptedException e) {
@@ -352,7 +352,7 @@ public class Distributor {
 	 * 
 	 */
 	
-	boolean askForToCurve (String planeId) {
+	boolean askForToCurve (int planeId) {
 		try {
 			takeOffCurve.acquire();
 		} catch (InterruptedException e) {
@@ -379,7 +379,7 @@ public class Distributor {
 	 * 
 	 */
 	
-	boolean askForTakeOffLane (String planeId) {
+	boolean askForTakeOffLane (int planeId) {
 		try {
 			takeOffLane.acquire();
 		} catch (InterruptedException e) {
