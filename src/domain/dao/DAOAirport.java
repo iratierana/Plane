@@ -8,7 +8,6 @@ import org.hibernate.Session;
 
 import configurations.ConnectHibernate;
 import domain.model.Airport;
-import domain.model.PlanePosition;
 
 /**
  * 

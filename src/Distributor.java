@@ -128,7 +128,9 @@ public class Distributor {
 		}
 
 		landingLane.release();
-
+		/*--------------UPDATE POSITION IN DATABSE----------------*/
+		updatePlanePosition(planeId, 3);
+		/*--------------------------------------------------------*/
 		System.out.println(planeId + " is in landing curve...");
 
 		return true;
@@ -371,7 +373,9 @@ public class Distributor {
 		}
 		
 		releaseToIntermediate(termMax - 1);
-
+		/*--------------UPDATE POSITION IN DATABSE----------------*/
+		updatePlanePosition(planeId, 39);
+		/*--------------------------------------------------------*/
 		System.out.println(planeId + " is in take off curve...");
 
 		return true;
@@ -398,7 +402,9 @@ public class Distributor {
 		}
 
 		takeOffCurve.release();
-		
+		/*--------------UPDATE POSITION IN DATABSE----------------*/
+		updatePlanePosition(planeId, 40);
+		/*--------------------------------------------------------*/
 		System.out.println(planeId + " is in take off line...");
 
 		return true;
@@ -420,7 +426,12 @@ public class Distributor {
 		return true;
 		
 	}
-	
+	/**
+	 * This function updates the plane position of any type plane.
+	 * @param planeId The id the of the plane to update.
+	 * @param planePosition The new position of the plane.
+	 * @return true if the update is ok, else false
+	 */
 	boolean updatePlanePosition(int planeId, int planePosition){
 		try {
 			databaseUpdateMtx.acquire(1);
@@ -433,6 +444,10 @@ public class Distributor {
 		}
 	}
 	
+	/**
+	 * This function make a exclusive connection to the database and creates a new airplane.
+	 * @return The airplane created in the database
+	 */
 	Airplane createPlaneInExclusiveWay(){
 		Airplane a;
 		try {

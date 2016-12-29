@@ -2,8 +2,6 @@ package domain.dao;
 
 import java.util.List;
 
-import javax.persistence.TypedQuery;
-
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
@@ -21,6 +19,7 @@ import domain.model.AirplanePhoto;
  * Class where are all the needed functions related with AirplanePhoto, in order to work with the database
  *  
  */
+@SuppressWarnings("deprecation")
 public class DAOAirplanePhoto {
 
 
@@ -34,7 +33,7 @@ public class DAOAirplanePhoto {
 	 * @return the list of photos if the load is correct
 	 * @return null if an error occurs during the load
 	 */
-	@SuppressWarnings({ "rawtypes", "deprecation", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static List<AirplanePhoto> loadAllAirplanePhotosOfOneAirplane(int airplaneId) {
 		List<AirplanePhoto> photoList = null;
 		String sql="SELECT photo.*"

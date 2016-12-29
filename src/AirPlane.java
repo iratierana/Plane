@@ -1,6 +1,3 @@
-import java.util.concurrent.Semaphore;
-
-import dataGenerator.PlaneGenerator;
 import domain.model.Airplane;
 
 public class AirPlane implements Runnable {

@@ -7,7 +7,6 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 
 import configurations.ConnectHibernate;
-import domain.model.Passanger;
 import domain.model.PlanePosition;
 
 /**
