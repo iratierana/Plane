@@ -245,7 +245,9 @@ public class Distributor {
 		if (intermediateNum == 1) {
 			landingCurve.release();
 		}
-		
+		/*--------------UPDATE POSITION IN DATABSE----------------*/
+		updateLandingIntermediateLinePositions(planeId, intermediateNum);
+		/*--------------------------------------------------------*/		
 		System.out.println(planeId + " is in landing intermediate lane nº " + intermediateNum);
 				
 		return true;
@@ -329,7 +331,9 @@ public class Distributor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		/*--------------UPDATE POSITION IN DATABSE----------------*/
+		updateTakeOffIntermediateLinePositions(planeId, intermediateNum);
+		/*--------------------------------------------------------*/
 		System.out.println(planeId + " is in take off intermediate lane nº " + intermediateNum);
 				
 		return true;
@@ -442,6 +446,53 @@ public class Distributor {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	/**
+	 * This function updates the intermediate landing position in the database, in a exclusive way.
+	 * @param planeId The id of the plane to update.
+	 * @param intermediateLine The number of the intermediate line.
+	 * @return true if the update is ok, else will return false.
+	 */
+	boolean updateLandingIntermediateLinePositions(int planeId, int intermediateLine){
+		boolean ok=false;
+		switch (intermediateLine) {
+		case 1 :	
+			updatePlanePosition(planeId, 4);
+			ok=true;
+			break;
+		case 2:
+			updatePlanePosition(planeId, 12);
+			ok=true;
+			break;
+		case 3:
+			updatePlanePosition(planeId, 20);
+			ok=true;
+			break;
+		case 4:
+			updatePlanePosition(planeId, 28);
+			ok=true;;
+			break;
+		}
+		return ok;
+	}
+	
+	boolean updateTakeOffIntermediateLinePositions(int planeId, int intermediateLine){
+		boolean ok=false;
+		switch (intermediateLine) {
+		case 1 :	
+			updatePlanePosition(planeId, 36);
+			ok=true;
+			break;
+		case 2:
+			updatePlanePosition(planeId, 37);
+			ok=true;
+			break;
+		case 3:
+			updatePlanePosition(planeId, 38);
+			ok=true;
+			break;
+		}
+		return ok;
 	}
 	
 	/**
