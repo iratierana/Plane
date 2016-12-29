@@ -51,6 +51,8 @@ public class DAOAirplane {
 			session.getTransaction().rollback();
 			ConnectHibernate.after();
 			return false;		
+		}finally {
+			ConnectHibernate.after();
 		}
 	}
 
@@ -68,15 +70,15 @@ public class DAOAirplane {
 			if(!airplaneList.isEmpty()){
 				a=airplaneList.get(0);
 			}
-			ConnectHibernate.after();
 			
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			ConnectHibernate.after();
 			return null;
+		}finally {
+			ConnectHibernate.after();
 		}
 		
-		ConnectHibernate.after();
 		return a;
 	}
 	
@@ -90,10 +92,14 @@ public class DAOAirplane {
 			session.getTransaction().begin();
 			session.saveOrUpdate(airplane);
 			session.getTransaction().commit();	
+			ConnectHibernate.after();
 			return true;
 		}catch(Exception e){
 			e.printStackTrace();
+			ConnectHibernate.after();
 			return false;
+		}finally {
+			ConnectHibernate.after();
 		}
 	}
 

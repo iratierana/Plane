@@ -45,15 +45,15 @@ public class DAOAirport {
 			if(!airportList.isEmpty()){
 				a=airportList.get(0);
 			}
-			ConnectHibernate.after();
 			
 		}catch (Exception e) {
 			session.getTransaction().rollback();
 			ConnectHibernate.after();
 			return null;
+		}finally {
+			ConnectHibernate.after();
 		}
 		
-		ConnectHibernate.after();
 		return a;
 	}
 }

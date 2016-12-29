@@ -43,15 +43,15 @@ public class DAOPlanePosition {
 			if(!positionList.isEmpty()){
 				p=positionList.get(0);
 			}
-			ConnectHibernate.after();
 			
 		}catch (Exception e) {
 			session.getTransaction().rollback();
 			ConnectHibernate.after();
 			return null;
+		}finally {
+			ConnectHibernate.after();
 		}
 		
-		ConnectHibernate.after();
 		return p;
 	}
 	
@@ -73,8 +73,10 @@ public class DAOPlanePosition {
 			positionList = query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectHibernate.after();
 		}
-		ConnectHibernate.after();
+		
 
 		
 		return positionList;

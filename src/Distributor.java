@@ -4,7 +4,9 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import dataGenerator.PlaneGenerator;
 import domain.dao.DAOAirplane;
+import domain.model.Airplane;
 
 public class Distributor {
 
@@ -96,13 +98,7 @@ public class Distributor {
 			landingWaitingTime = landingWaitingTime - 1000;
 		
 		/*--------------UPDATE POSITION IN DATABSE----------------*/
-		try {
-			databaseUpdateMtx.acquire(1);
-			DAOAirplane.updateAirplanePosition(planeId, 2);
-			databaseUpdateMtx.release(1);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		updatePlanePosition(planeId, 2);
 		/*--------------------------------------------------------*/
 		System.out.println(planeId + " is landing...");
 
@@ -423,5 +419,30 @@ public class Distributor {
 		
 		return true;
 		
+	}
+	
+	boolean updatePlanePosition(int planeId, int planePosition){
+		try {
+			databaseUpdateMtx.acquire(1);
+			DAOAirplane.updateAirplanePosition(planeId, planePosition);
+			databaseUpdateMtx.release(1);
+			return true;
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	Airplane createPlaneInExclusiveWay(){
+		Airplane a;
+		try {
+			databaseUpdateMtx.acquire(1);
+			a = PlaneGenerator.createAirplane();
+			databaseUpdateMtx.release(1);
+			return a;
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			return null;
+		}	
 	}
 }

@@ -7,7 +7,7 @@ public class AirPlane implements Runnable {
 	
 	Distributor distributor;
 	Airplane airplane;
-	public static Semaphore planeCreationMtx = new Semaphore(1);
+//	public static Semaphore planeCreationMtx = new Semaphore(1);
 	
 	/**
 	 * 
@@ -47,13 +47,7 @@ public class AirPlane implements Runnable {
 		long time = 0;
 		/*--------------------------PLANE CREATION-----------------------*/
 		/*We need to create the planes in a exclusive way, because in the database we can only do one insert in the same moment*/
-		try {
-			planeCreationMtx.acquire(1);
-			airplane = PlaneGenerator.createAirplane();
-			planeCreationMtx.release(1);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}	
+		airplane = distributor.createPlaneInExclusiveWay();
 		/*------------------------------------------------------------------*/
 		
 		while ((time = distributor.askForLandingLane(this.airplane.getAirplaneId())) > 0) {

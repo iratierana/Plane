@@ -44,8 +44,9 @@ public class DAOAirline {
 			airlineList = query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectHibernate.after();
 		}
-		ConnectHibernate.after();
 
 		
 		return airlineList;

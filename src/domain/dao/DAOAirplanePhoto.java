@@ -48,9 +48,9 @@ public class DAOAirplanePhoto {
 			photoList = query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectHibernate.after();
 		}
-		ConnectHibernate.after();
-
 		
 		return photoList;
 	}
