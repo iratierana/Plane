@@ -122,7 +122,6 @@ public class Distributor {
 		try {
 			landingCurve.acquire(); //intentas coger y hasta que no cojes no para
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -161,6 +160,9 @@ public class Distributor {
 					
 					aircraftParkings.get(n).setSituation("FULL");
 					
+					/*--------------UPDATE POSITION IN DATABSE----------------*/
+					updateParkingPositionInDatabase(planeId, aircraftParkings.get(n));
+					/*--------------------------------------------------------*/
 					System.out.println(planeId + " is going to " + aircraftParkings.get(n).toString());
 					
 					num = n;
@@ -175,7 +177,6 @@ public class Distributor {
 					aircraftQueue.await();
 					System.out.println("Parkins are full");
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -237,7 +238,6 @@ public class Distributor {
 		try {
 			landInt.get(intermediateNum - 1).acquire();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -290,7 +290,9 @@ public class Distributor {
 			e.printStackTrace();
 			return false;
 		}
-
+		/*--------------UPDATE POSITION IN DATABSE----------------*/
+		updateTerminalLinePosition(planeId, termNum);
+		/*--------------------------------------------------------*/	
 		System.out.println(planeId + " is in terminal line " + termNum);
 
 		return true;
@@ -328,7 +330,6 @@ public class Distributor {
 		try {
 			toInt.get(intermediateNum - 1).acquire();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		/*--------------UPDATE POSITION IN DATABSE----------------*/
@@ -371,7 +372,6 @@ public class Distributor {
 		try {
 			takeOffCurve.acquire();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -400,7 +400,6 @@ public class Distributor {
 		try {
 			takeOffLane.acquire();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -476,6 +475,12 @@ public class Distributor {
 		return ok;
 	}
 	
+	/**
+	 * This function updates the intermediate taking off positions in the database, in a exclusive way.
+	 * @param planeId The id of the plane to update.
+	 * @param intermediateLine The number of the intermediate line.
+	 * @return true if the update is ok, else will return false.
+	 */
 	boolean updateTakeOffIntermediateLinePositions(int planeId, int intermediateLine){
 		boolean ok=false;
 		switch (intermediateLine) {
@@ -489,6 +494,141 @@ public class Distributor {
 			break;
 		case 3:
 			updatePlanePosition(planeId, 38);
+			ok=true;
+			break;
+		}
+		return ok;
+	}
+	
+	/**
+	 * This function updates the terminal line position in the database.
+	 * @param planeId The id of the plane to update the position.
+	 * @param termNumb The new terminal line position.
+	 * @return true if the update is OK, else false.
+	 */
+	boolean updateTerminalLinePosition(int planeId, int termNumb ){
+		boolean ok = false;
+		switch (termNumb) {
+		case 1:		
+			updatePlanePosition(planeId, 5);
+			ok = true;
+			break;
+		case 2:		
+			updatePlanePosition(planeId, 13);
+			ok = true;
+			break;
+		case 3:		
+			updatePlanePosition(planeId, 21);
+			ok = true;
+			break;	
+		case 4:		
+			updatePlanePosition(planeId, 29);
+			ok = true;
+			break;
+		}
+		return ok;
+	}
+	
+	
+	/**
+	 * This function updates the position of the parking and terminal in the database
+	 * @param planeId The id of the plane to update.
+	 * @param parking The parking where the plane is going to be parked.
+	 * @return true if the update is OK, else false.
+	 */
+	boolean updateParkingPositionInDatabase(int planeId, AircraftParking parking){
+		boolean ok=false;
+		switch (parking.getTerminal()) {
+		case 1:	
+			switch (parking.getPosition()) {
+			case 1:		
+				updatePlanePosition(planeId, 6);
+				break;
+			case 2:		
+				updatePlanePosition(planeId, 7);
+				break;
+			case 3:	
+				updatePlanePosition(planeId, 8);
+				break;
+			case 4:	
+				updatePlanePosition(planeId, 9);
+				break;
+			case 5:	
+				updatePlanePosition(planeId, 10);
+				break;
+			case 6:	
+				updatePlanePosition(planeId, 11);
+				break;
+			}
+			ok=true;
+			break;
+		case 2:
+			switch (parking.getPosition()) {
+			case 1:		
+				updatePlanePosition(planeId, 14);
+				break;
+			case 2:		
+				updatePlanePosition(planeId, 15);
+				break;
+			case 3:	
+				updatePlanePosition(planeId, 16);
+				break;
+			case 4:	
+				updatePlanePosition(planeId, 17);
+				break;
+			case 5:
+				updatePlanePosition(planeId, 18);
+				break;
+			case 6:	
+				updatePlanePosition(planeId, 19);
+				break;
+			}
+			ok=true;
+			break;
+		case 3:
+			switch (parking.getPosition()) {
+			case 1:	
+				updatePlanePosition(planeId, 22);
+				break;
+			case 2:			
+				updatePlanePosition(planeId, 23);
+				break;
+			case 3:	
+				updatePlanePosition(planeId, 24);
+				break;
+			case 4:
+				updatePlanePosition(planeId, 25);
+				break;
+			case 5:	
+				updatePlanePosition(planeId, 26);
+				break;
+			case 6:		
+				updatePlanePosition(planeId, 27);
+				break;
+			}
+			ok=true;
+			break;
+		case 4:
+			switch (parking.getPosition()) {
+			case 1:	
+				updatePlanePosition(planeId, 30);
+				break;
+			case 2:		
+				updatePlanePosition(planeId, 31);
+				break;
+			case 3:	
+				updatePlanePosition(planeId, 32);
+				break;
+			case 4:	
+				updatePlanePosition(planeId, 33);
+				break;
+			case 5:		
+				updatePlanePosition(planeId, 34);
+				break;
+			case 6:		
+				updatePlanePosition(planeId, 35);
+				break;
+			}
 			ok=true;
 			break;
 		}
