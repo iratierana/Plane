@@ -422,9 +422,10 @@ public class Distributor {
 	 * 
 	 */
 	
-	boolean releaseTakeOffLane () {
+	boolean releaseTakeOffLane (int planeId) {
 		
 		takeOffLane.release();
+		updatePlanePosition(planeId, 41);
 		
 		return true;
 		

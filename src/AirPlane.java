@@ -103,7 +103,7 @@ public class AirPlane implements Runnable {
 		if (!distributor.askForToCurve(this.airplane.getAirplaneId())) System.err.println("Take off curve");
 		
 		if (!distributor.askForTakeOffLane(this.airplane.getAirplaneId())) System.err.println("Take off line");
-		if (!distributor.releaseTakeOffLane()) System.err.println("Take off line");
+		if (!distributor.releaseTakeOffLane(this.airplane.getAirplaneId())) System.err.println("Take off line");
 		
 		
 	}
