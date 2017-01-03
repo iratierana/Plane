@@ -47,7 +47,6 @@ public class DAOAirport {
 			
 		}catch (Exception e) {
 			session.getTransaction().rollback();
-			ConnectHibernate.after();
 			return null;
 		}finally {
 			ConnectHibernate.after();

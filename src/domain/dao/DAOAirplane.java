@@ -72,7 +72,6 @@ public class DAOAirplane {
 			
 		} catch (Exception e) {
 			session.getTransaction().rollback();
-			ConnectHibernate.after();
 			return null;
 		}finally {
 			ConnectHibernate.after();
