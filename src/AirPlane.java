@@ -53,7 +53,11 @@ public class AirPlane implements Runnable {
 		
 		}
 		
+		goToBed(8000);//landing lane
+		
 		if (!distributor.askForLandingCurve(this.airplane.getAirplaneId())) System.err.println("Landing Curve");
+		
+		goToBed(4000);
 		
 		
 		AircraftParking acp = distributor.askForTerminal(this.airplane.getAirplaneId());
@@ -62,7 +66,7 @@ public class AirPlane implements Runnable {
 		for (int n = 1; n <= acp.getTerminal(); n++) {
 			
 			if (!distributor.askForLandingIntermediate(n, this.airplane.getAirplaneId())) System.err.println("Landing Intermediate");
-			
+			goToBed(2000);
 			if (n > 1) {
 				if (!distributor.releaseLandingIntermediate(n - 1)) System.err.println("Releasing Landing Intermediate");
 			}
@@ -93,6 +97,7 @@ public class AirPlane implements Runnable {
 			
 			if (n > acp.getTerminal()) {
 				if (!distributor.releaseToIntermediate(n - 1)) System.err.println("Releasing Landing Intermediate");
+				goToBed(2000);
 			} else {
 				if (!distributor.releaseTermLine(acp.getTerminal())) System.err.println("Releasing Terminal line");
 			}
@@ -101,8 +106,10 @@ public class AirPlane implements Runnable {
 		//goToBed(1000);
 		
 		if (!distributor.askForToCurve(this.airplane.getAirplaneId())) System.err.println("Take off curve");
+		goToBed(4000);
 		
 		if (!distributor.askForTakeOffLane(this.airplane.getAirplaneId())) System.err.println("Take off line");
+		goToBed(8000);
 		if (!distributor.releaseTakeOffLane(this.airplane.getAirplaneId())) System.err.println("Take off line");
 		
 		Main.airplanesNumberInAirplane.release();
