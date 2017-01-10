@@ -10,27 +10,27 @@ import configurations.ConnectHibernate;
 import domain.model.Airline;
 
 /**
- * 
+ * The Class DAOAirline.
+ *
  * @author Xabier Jauregi
- * @author Irati Eraña
- * @author Mikel Arizmendiarrieta 
+ * @author Irati Erana
+ * @author Mikel Arizmendiarrieta
  * @version 1.0
  * @since   2016-12-13
  * 
  * Class where are all the needed functions related with Airline, in order to work with the database
- *  
  */
 
 public class DAOAirline {
 	
+	/** The session. */
 	private static Session session;
 			
 	/**
-	 * 
-	 * This function loads all the airlines of the database
-	 * 
+	 * This function loads all the airlines of the database.
+	 *
 	 * @return a list of all the airlines of the database
-	 * @return null if an error occurs during the load
+	 * null if an error occurs during the load
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<Airline> loadAllAirlines() {

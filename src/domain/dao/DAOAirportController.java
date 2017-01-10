@@ -13,7 +13,7 @@ import domain.model.AirportController;
 /**
  * 
  * @author Xabier Jauregi
- * @author Irati Eraña
+ * @author Irati Erana
  * @author Mikel Arizmendiarrieta 
  * @version 1.0
  * @since   2016-12-13
@@ -46,8 +46,6 @@ public class DAOAirportController {
 		}finally {
 			ConnectHibernate.after();
 		}
-
-		
 		return cotrollerList;
 	}
 	

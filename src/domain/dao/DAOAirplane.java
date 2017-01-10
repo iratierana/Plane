@@ -11,28 +11,29 @@ import domain.model.Airplane;
 import domain.model.PlanePosition;
 
 
+// TODO: Auto-generated Javadoc
 /**
- * 
+ * The Class DAOAirplane.
+ *
  * @author Xabier Jauregi
- * @author Irati Eraña
- * @author Mikel Arizmendiarrieta 
+ * @author Irati Erana
+ * @author Mikel Arizmendiarrieta
  * @version 1.0
  * @since   2016-12-13
  * 
  * Class where are all the needed functions related with Airplane, in order to work with the database
- *  
  */
 public class DAOAirplane {
 	
+	/** The session. */
 	private static Session session;
 	
 	/**
-	 * 
-	 * This function insert aan airplane in the database
-	 * 
+	 * This function insert aan airplane in the database.
+	 *
 	 * @param airplane the airplane to insert in the database
 	 * @return true if the insert is correct
-	 * @return false if and error occurs during the insert
+	 * false if and error occurs during the insert
 	 */
 	public static boolean insertAirplane(Airplane airplane){
 		try {
@@ -55,6 +56,12 @@ public class DAOAirplane {
 		}
 	}
 
+	/**
+	 * Load airplane.
+	 *
+	 * @param id the id
+	 * @return the airplane
+	 */
 	public static Airplane loadAirplane (int id){
 		List<Airplane> airplaneList = null;
 		Airplane a = new Airplane();
@@ -80,6 +87,13 @@ public class DAOAirplane {
 		return a;
 	}
 	
+	/**
+	 * Update airplane position.
+	 *
+	 * @param planeId the plane id
+	 * @param newPlanePositionId the new plane position id
+	 * @return true, if successful
+	 */
 	public static boolean updateAirplanePosition(int planeId, int newPlanePositionId){
 		try{
 			PlanePosition newPlanePosition = DAOPlanePosition.loadPlanePosition(newPlanePositionId);
