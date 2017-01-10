@@ -6,8 +6,16 @@ import java.io.IOException;
 import domain.dao.DAOAirplane;
 import domain.model.Airplane;
 
+/**
+ * The Class PlaneGenerator.
+ */
 public class PlaneGenerator {
 
+	/**
+	 * Creates the airplane.
+	 *
+	 * @return the airplane
+	 */
 	public static Airplane createAirplane() {
 		Airplane airplane = new Airplane();		
 		try {
@@ -36,7 +44,4 @@ public class PlaneGenerator {
 
 		return airplane;
 	}
-
-
-
 }

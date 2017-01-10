@@ -21,8 +21,16 @@ import domain.model.Airport;
 import domain.model.AirportController;
 import domain.model.PlanePosition;
 
+/**
+ * The Class DataGenerator.
+ */
 public class DataGenerator {
 
+	/**
+	 * Generate random plane name.
+	 *
+	 * @return the string
+	 */
 	public static String generateRandomPlaneName() {
 		String[] airplaneName = new String[9];
 		airplaneName[0] = "Boeing 747";
@@ -38,22 +46,42 @@ public class DataGenerator {
 		return airplaneName[randInt(0, 8)];
 	}
 
+	/**
+	 * Generate random serial number.
+	 *
+	 * @return the string
+	 */
 	public static String generateRandomSerialNumber() {
 		int[] serialNumber = { 27090, 1236, 380, 2456, 12345, 2356, 4569, 89652, 58324 };
 		return String.valueOf(serialNumber[randInt(0, serialNumber.length - 1)]);
 	}
 
+	/**
+	 * Generate random line number.
+	 *
+	 * @return the int
+	 */
 	public static int generateRandomLineNumber() {
 		int[] lineNumber = { 959, 468, 213, 156, 9843, 456, 789, 321, 852 };
 		return lineNumber[randInt(0, lineNumber.length - 1)];
 	}
 
+	/**
+	 * Generate random current registration.
+	 *
+	 * @return the string
+	 */
 	public static String generateRandomCurrentRegistration() {
 		String[] currentRegistration = { "G-BNLY", "G-EUPK", "G-EUYI", "D-AIQE", "N276AY" };
 		return currentRegistration[randInt(0, currentRegistration.length - 1)];
 
 	}
 
+	/**
+	 * Generate random operator owner.
+	 *
+	 * @return the string
+	 */
 	public static String generateRandomOperatorOwner() {
 		String[] operatorOwner = { "Xabier Jauregi", "Irati Erana", "Mikel Airzmendiarrieta", "Asier Sampietro",
 				"Joanes Plazaola", "Ane Alameda" };
@@ -61,6 +89,11 @@ public class DataGenerator {
 
 	}
 
+	/**
+	 * Generate random date.
+	 *
+	 * @return the date
+	 */
 	public static Date generateRandomDate() {
 		Date date = null;
 		String[] year = { "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019" };
@@ -81,19 +114,41 @@ public class DataGenerator {
 
 	}
 
+	/**
+	 * Generate random engine model.
+	 *
+	 * @return the string
+	 */
 	public static String generateRandomEngineModel() {
 		String[] engineModel = { "RB211-524H2", "V2522-A5", "PW4060", "CFM56-5B4/3", "GP7270" };
 		return engineModel[randInt(0, engineModel.length - 1)];
 	}
 
+	/**
+	 * Generate random ours of flight.
+	 *
+	 * @return the int
+	 */
 	public static int generateRandomOursOfFlight() {
 		return randInt(0, 10000);
 	}
 
+	/**
+	 * Generate random number of flights.
+	 *
+	 * @return the int
+	 */
 	public static int generateRandomNumberOfFlights() {
 		return randInt(0, 500);
 	}
 
+	/**
+	 * Rand int.
+	 *
+	 * @param min the min
+	 * @param max the max
+	 * @return the int
+	 */
 	public static int randInt(int min, int max) {
 
 		Random rand = new Random();
@@ -103,10 +158,22 @@ public class DataGenerator {
 		return randomNum;
 	}
 
+	/**
+	 * Generate initial plane positon from database.
+	 *
+	 * @return the plane position
+	 */
 	public static PlanePosition generateInitialPlanePositonFromDatabase() {
 		return DAOPlanePosition.loadPlanePosition(1);
 	}
 
+	/**
+	 * Generate random photo list.
+	 *
+	 * @param airplane the airplane
+	 * @return the array list
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static ArrayList<AirplanePhoto> generateRandomPhotoList(Airplane airplane) throws IOException {
 
 		ArrayList<AirplanePhoto> photoList = new ArrayList<AirplanePhoto>();
@@ -174,6 +241,11 @@ public class DataGenerator {
 		return photoList;
 	}
 
+	/**
+	 * Generate random controller list from database.
+	 *
+	 * @return the array list
+	 */
 	public static ArrayList<AirportController> generateRandomControllerListFromDatabase() {
 		ArrayList<AirportController> controllerList = new ArrayList<AirportController>();
 		List<AirportController> allControllerList = DAOAirportController.loadAllAirportControllers();
@@ -183,10 +255,20 @@ public class DataGenerator {
 		return controllerList;
 	}
 
+	/**
+	 * Generate airport for location of the plane.
+	 *
+	 * @return the airport
+	 */
 	public static Airport generateAirportForLocationOfThePlane() {
 		return DAOAirport.loadAirport("Heatrhow");
 	}
 
+	/**
+	 * Generate random airline from databse.
+	 *
+	 * @return the airline
+	 */
 	public static Airline generateRandomAirlineFromDatabse() {
 		List<Airline> airlineList = DAOAirline.loadAllAirlines();
 		return airlineList.get(randInt(0, airlineList.size()-1));
