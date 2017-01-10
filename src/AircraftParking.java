@@ -1,11 +1,18 @@
-
+/**
+ * The Class AircraftParking.
+ */
 public class AircraftParking {
 
+	/** The terminal. */
 	int terminal;
+	
+	/** The position. */
 	int position;
+	
+	/** The situation. */
 	String situation;
 
-	/*
+	/**
 	 * 
 	 * Constructor of AircraftParking class.
 	 * Initialize the terminal, position and the situation of the parking.
@@ -22,7 +29,7 @@ public class AircraftParking {
 		situation = "EMPTY";
 	}
 	
-	/*
+	/**
 	 * 
 	 * To get the terminal in which the airplane is going to park.
 	 * 
@@ -34,43 +41,40 @@ public class AircraftParking {
 		return terminal;
 	}
 
-	/*
-	 * 
+	/** 
 	 * To get the position in which the airplane is going to park.
 	 * 
 	 * @return It returns the position.
 	 * 
 	 */
-	
+
 	public int getPosition() {
 		return position;
 	}
 
-	/*
+	/**
 	 * 
 	 * To get the situation of the parking(if it is empty or not).
 	 * 
 	 * @return It returns the situation of the parking.
 	 * 
 	 */
-	
+
 	public String getSituation() {
 		return situation;
 	}
 
-	/*
-	 * 
-	 * To set the situation of the parking(if it is empty or not).
-	 * 
-	 * @return It returns the situation of the parking.
-	 * 
-	 */
 	
+	/**
+	 * Sets the situation.
+	 *
+	 * @param situation the new situation
+	 */
 	public void setSituation(String situation) {
 		this.situation = situation;
 	}
 
-	/*
+	/**
 	 * 
 	 * To give format to the information of the aircraft parking.
 	 * 
@@ -78,11 +82,10 @@ public class AircraftParking {
 	 * 
 	 */
 	
+	
 	@Override
 	public String toString() {
 		return "Aircraft Parking in terminal " + terminal + " in position " + position;
 	}
-	
-	
 	
 }

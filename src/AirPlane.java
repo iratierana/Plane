@@ -1,19 +1,21 @@
 import domain.model.Airplane;
-
+/**
+ * The Class AirPlane.
+ */
 public class AirPlane implements Runnable {
 	
+	/** The distributor. */
 	Distributor distributor;
+	
+	/** The airplane. */
 	Airplane airplane;
 //	public static Semaphore planeCreationMtx = new Semaphore(1);
 	
 	/**
-	 * 
 	 * Constructor of AirPlane class.
 	 * Stablishes the distributor and the planeId.
-	 * 
+	 *
 	 * @param distributor To know where to ask permissions.
-	 * @param planeId     To know which plane it is.
-	 * 
 	 */
 	
 	public AirPlane(Distributor distributor) {
@@ -132,5 +134,4 @@ public class AirPlane implements Runnable {
 			e.printStackTrace();
 		}
 	}
-
 }

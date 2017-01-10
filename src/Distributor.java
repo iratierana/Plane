@@ -8,25 +8,46 @@ import dataGenerator.PlaneGenerator;
 import domain.dao.DAOAirplane;
 import domain.model.Airplane;
 
+/**
+ * The Class Distributor.
+ */
 public class Distributor {
 
+	/** The term max. */
 	int termMax = 4;
+	
+	/** The aircraft parking max. */
 	int aircraftParkingMax = 6;
 
+	/** The database update mtx. */
 	Semaphore databaseUpdateMtx = new Semaphore(1);
 	
+	/** The take off lane. */
 	Semaphore landingLane, takeOffLane;
+	
+	/** The take off curve. */
 	Semaphore landingCurve, takeOffCurve;
 
+	/** The land int. */
 	ArrayList<Semaphore> landInt;
+	
+	/** The to int. */
 	ArrayList<Semaphore> toInt;
+	
+	/** The term line. */
 	ArrayList<Semaphore> termLine;
 	
 
+	/** The aircraft parking lock. */
 	Lock aircraftParkingLock;
+	
+	/** The aircraft queue. */
 	Condition aircraftQueue;
+	
+	/** The aircraft parkings. */
 	ArrayList<AircraftParking> aircraftParkings;
 
+	/** The landing waiting time. */
 	Long landingWaitingTime = (long) 0;
 
 	/**
@@ -223,15 +244,13 @@ public class Distributor {
 	}
 	
 	/**
-	 * 
 	 * Function to ask permission to introduce to the landing intermediate line.
 	 * The plane simulator thread will call this function.
-	 * 
+	 *
+	 * @param intermediateNum To know in which intermediate lane is asking permission for.
 	 * @param planeId 		  To know which plane is asking to land.
-	 * @param intermediateNum To know in which intermediate lane is asking permission for. 
-	 * @return 		 		  In case something goes wrong, it returns false. 
+	 * @return 		 		  In case something goes wrong, it returns false.
 	 * @see 		  		  Plane status
-	 * 
 	 */
 	
 	boolean askForLandingIntermediate(int intermediateNum, int planeId) {
@@ -271,15 +290,13 @@ public class Distributor {
 	}
 
 	/**
-	 * 
 	 * Function to ask permission to introduce to the terminal line.
 	 * The plane simulator thread will call this function.
-	 * 
+	 *
+	 * @param termNum 	  To know in which terminal is asking permission for.
 	 * @param planeId 		  To know which plane is asking to land.
-	 * @param termNum		  To know in which terminal is asking permission for. 
 	 * @return 		 		  In case something goes wrong, it returns false.
 	 * @see 		  		  Plane status
-	 * 
 	 */
 	
 	boolean askForTermLine (int termNum, int planeId) {
@@ -315,15 +332,13 @@ public class Distributor {
 	}
 	
 	/**
-	 * 
 	 * Function to ask permission to introduce to the intermediate line.
 	 * The plane simulator thread will call this function.
-	 * 
+	 *
+	 * @param intermediateNum To know which intermediate line is asking permission for.
 	 * @param planeId 		  To know which plane is asking to land.
-	 * @param intermediateNum To know which intermediate line is asking permission for. 
 	 * @return 		 		  In case something goes wrong, it returns false.
 	 * @see 		  		  Plane status
-	 * 
 	 */
 	
 	boolean askForToIntermediate(int intermediateNum, int planeId) {
@@ -414,12 +429,12 @@ public class Distributor {
 	}
 	
 	/**
-	 * 
 	 * Function to release the take off lane.
 	 * The plane simulator thread will call this function.
 	 *  
+	 *
+	 * @param planeId the plane id
 	 * @return 		 		  If everything goes ok returns true.
-	 * 
 	 */
 	
 	boolean releaseTakeOffLane (int planeId) {
@@ -532,7 +547,8 @@ public class Distributor {
 	
 	
 	/**
-	 * This function updates the position of the parking and terminal in the database
+	 * This function updates the position of the parking and terminal in the database.
+	 *
 	 * @param planeId The id of the plane to update.
 	 * @param parking The parking where the plane is going to be parked.
 	 * @return true if the update is OK, else false.
