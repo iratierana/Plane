@@ -195,34 +195,34 @@ public class DataGenerator {
 
 		switch (airplane.getName()) {
 		case "Boeing 747":
-			file = new File("D:/Uni3/1Semester/POPBL5/plane.jpg");			
+			file = new File("C:/Users/Mikel/Desktop/planesPhotos/Boeing_747.jpg");			
 			break;
 		case "Airbus A319":
-			file = new File("D:/Uni3/1Semester/POPBL5/plane.jpg");
+			file = new File("C:/Users/Mikel/Desktop/planesPhotos/Airbus_A319.jpg");
 			break;
 		case "Airbus  A330":
-			file = new File("D:/Uni3/1Semester/POPBL5/plane.jpg");
+			file = new File("C:/Users/Mikel/Desktop/planesPhotos/Airbus_A330.jpg");
 			break;
 		case "Boeing 767":
-			file = new File("D:/Uni3/1Semester/POPBL5/plane.jpg");
+			file = new File("C:/Users/Mikel/Desktop/planesPhotos/Boeing_767.jpg");
 			break;
 		case "Airbus A320":
-			file = new File("D:/Uni3/1Semester/POPBL5/plane.jpg");
+			file = new File("C:/Users/Mikel/Desktop/planesPhotos/Airbus_A320.jpg");
 			break;
 		case "Airbur A350":
-			file = new File("D:/Uni3/1Semester/POPBL5/plane.jpg");
+			file = new File("C:/Users/Mikel/Desktop/planesPhotos/Airbur_A350.jpg");
 			break;
 		case "Airbus C380":
-			file = new File("D:/Uni3/1Semester/POPBL5/plane.jpg");
+			file = new File("C:/Users/Mikel/Desktop/planesPhotos/Airbus_C380.jpg");
 			break;
 		case "Boeing 777":
-			file = new File("D:/Uni3/1Semester/POPBL5/plane.jpg");
+			file = new File("C:/Users/Mikel/Desktop/planesPhotos/Boeing_777.jpg");
 			break;
 		case "Boeing 737":
-			file = new File("D:/Uni3/1Semester/POPBL5/plane.jpg");
+			file = new File("C:/Users/Mikel/Desktop/planesPhotos/Boeing_737.jpg");
 			break;
 		default:
-			file = new File("D:/Uni3/1Semester/POPBL5/plane.jpg");
+			file = new File("C:/Users/Mikel/Desktop/planesPhotos/Boeing_747.jpg");
 			break;
 		}
 		bFile = new byte[(int) file.length()];
