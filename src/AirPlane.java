@@ -114,7 +114,7 @@ public class AirPlane implements Runnable {
 		goToBed(8000);
 		if (!distributor.releaseTakeOffLane(this.airplane.getAirplaneId())) System.err.println("Take off line");
 		
-		Main.airplanesNumberInAirplane.release();
+		Main.airplanesNumberInAirport.release();
 	}
 	
 

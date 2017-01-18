@@ -11,7 +11,7 @@ import java.util.concurrent.Semaphore;
 public class Main {
 	
 	/** The airplanes number in airplane. */
-	public static Semaphore airplanesNumberInAirplane = new Semaphore(2);
+	public static Semaphore airplanesNumberInAirport = new Semaphore(6);
 	
 	/**
 	 * The main method.
@@ -30,7 +30,7 @@ public class Main {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			if(Main.airplanesNumberInAirplane.tryAcquire()){
+			if(Main.airplanesNumberInAirport.tryAcquire()){
 				thread = new Thread(new AirPlane(distributor));
 				thread.start();
 			}
