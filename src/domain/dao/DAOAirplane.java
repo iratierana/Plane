@@ -41,7 +41,7 @@ public class DAOAirplane {
 			ConnectHibernate.before();
 			session = ConnectHibernate.getSession();
 			session.getTransaction().begin();
-			session.save(airplane); //erlazinuak itxen dianian save kendu eta persist ipinibiada eta eralazinuan cascade cascade type.persist
+			session.save(airplane); 
 			session.getTransaction().commit();
 			ConnectHibernate.after();
 			return true;

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -272,6 +273,46 @@ public class DataGenerator {
 	public static Airline generateRandomAirlineFromDatabse() {
 		List<Airline> airlineList = DAOAirline.loadAllAirlines();
 		return airlineList.get(randInt(0, airlineList.size()-1));
+	}
+	
+	public static Airport loadRandomAirport(){
+		List<Airport> airportList = DAOAirport.loadAllAirports();
+		return airportList.get(randInt(0, airportList.size()-1));
+	}
+	
+	public static Date generateRandomDateToFlight(int type, Date previous){
+		
+		Date date = null;
+		String[] year = { "2017", "2018", "2019" };
+		String[] day = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
+				"18", "19", "20", "21", "22", "23", "24", "25", "26" };
+		String[] month = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
+		String expectedPattern = "MM/dd/yyyy";
+		SimpleDateFormat formatter = new SimpleDateFormat(expectedPattern);
+		try {
+			switch (type) {
+			case 1:
+				String userInput = month[randInt(0, month.length - 1)] + "/" + day[randInt(0, day.length - 1)] + "/"
+						+ year[randInt(0, year.length - 1)];
+				date = formatter.parse(userInput);
+				break;
+			case 2:              
+				Calendar cal = Calendar.getInstance(); 
+				cal.setTime(previous); 
+				cal.add(Calendar.DATE, 1);
+				previous = cal.getTime();
+				date = previous;
+				break;
+			default:
+				break;
+			}
+			
+			return date;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return date;
+		}
+		
 	}
 
 }

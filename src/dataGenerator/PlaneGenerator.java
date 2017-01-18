@@ -17,7 +17,7 @@ public class PlaneGenerator {
 	 * @return the airplane
 	 */
 	public static Airplane createAirplane() {
-		Airplane airplane = new Airplane();		
+		Airplane airplane = new Airplane();	
 		try {
 			airplane.setName(DataGenerator.generateRandomPlaneName());
 			airplane.setSerialNumb(DataGenerator.generateRandomSerialNumber());
@@ -39,6 +39,7 @@ public class PlaneGenerator {
 		}
 		
 		DAOAirplane.insertAirplane(airplane);
+		FlightGenerator.createFlight(airplane);
 		
 		System.out.println("Plane created");
 

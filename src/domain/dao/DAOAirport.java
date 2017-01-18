@@ -8,6 +8,7 @@ import org.hibernate.Session;
 
 import configurations.ConnectHibernate;
 import domain.model.Airport;
+import domain.model.Flight;
 
 /**
  * 
@@ -54,4 +55,47 @@ public class DAOAirport {
 		
 		return a;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Airport> loadAllAirports(){
+		
+		List<Airport> airportList = null;
+		try {
+			ConnectHibernate.before();
+			session = ConnectHibernate.getSession();
+			TypedQuery<Airport> query = session.createQuery("from Airport");
+			airportList = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			ConnectHibernate.after();
+		}
+
+		
+		return airportList;
+		
+	}
+	
+	public static boolean insertFlightInDatabase(Flight flight){
+		
+		try {
+					
+					ConnectHibernate.before();
+					session = ConnectHibernate.getSession();
+					session.getTransaction().begin();
+					session.save(flight); 
+					session.getTransaction().commit();
+					ConnectHibernate.after();
+					return true;
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+					session.getTransaction().rollback();
+					ConnectHibernate.after();
+					return false;		
+				}finally {
+					ConnectHibernate.after();
+				}
+				
+			}
 }

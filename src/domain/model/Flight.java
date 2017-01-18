@@ -285,5 +285,15 @@ public class Flight {
 	public void setPassangerList(Collection<Passanger> passangerList) {
 		this.passangerList = passangerList;
 	}
+
+	public Airplane getAirplane() {
+		return airplane;
+	}
+
+	public void setAirplane(Airplane airplane) {
+		this.airplane = airplane;
+	}
+	
+	
 	
 }
