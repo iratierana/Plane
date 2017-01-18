@@ -83,13 +83,13 @@ public class DAOAirport {
 					ConnectHibernate.before();
 					session = ConnectHibernate.getSession();
 					session.getTransaction().begin();
-					session.save(flight); 
+					session.saveOrUpdate(flight); 
+					session.flush();
 					session.getTransaction().commit();
 					ConnectHibernate.after();
 					return true;
 					
 				} catch (Exception e) {
-					e.printStackTrace();
 					session.getTransaction().rollback();
 					ConnectHibernate.after();
 					return false;		
@@ -97,5 +97,7 @@ public class DAOAirport {
 					ConnectHibernate.after();
 				}
 				
-			}
+	}
+	
+
 }
