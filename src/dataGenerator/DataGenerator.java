@@ -299,7 +299,7 @@ public class DataGenerator {
 			case 2:              
 				Calendar cal = Calendar.getInstance(); 
 				cal.setTime(previous); 
-				cal.add(Calendar.DATE, 1);
+				cal.add(Calendar.DATE, randInt(1, 3));
 				previous = cal.getTime();
 				date = previous;
 				break;
