@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- Database connection settings -->
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/heathrow_airport</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">1234</property>
+
+        <!-- JDBC connection pool (use the built-in) -->
+        <property name="connection.pool_size">10</property>
+
+        <!-- SQL dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+
+        <!-- Disable the second-level cache  -->
+        <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">update</property>
+        
+        <mapping class="domain.model.Runway"/>
+		
+		<mapping class="domain.dao.DAOAirplanePhoto"/>
+        <mapping class="domain.model.AirplanePhoto"/>
+		
+		<mapping class="domain.dao.DAOAirplane"/>
+        <mapping class="domain.model.Airplane"/>
+        
+        <mapping class="domain.model.Flight"/>
+        
+        <mapping class="domain.dao.DAOPlanePosition"/>
+        <mapping class="domain.model.PlanePosition"/>
+          
+		<mapping class="domain.model.Airline"/>
+		
+		<mapping class="domain.model.AirlineManager"/>
+		
+		<mapping class="domain.dao.DAOAirportController"/>
+		<mapping class="domain.model.AirportController"/>
+		
+		<mapping class="domain.model.Direction"/>
+
+		<mapping class="domain.model.Passanger"/>
+		
+		<mapping class="domain.model.Airport"/>
+        
+		
+	</session-factory>
+</hibernate-configuration>

@@ -1,27 +1,30 @@
-
+import domain.model.Airplane;
+/**
+ * The Class AirPlane.
+ */
 public class AirPlane implements Runnable {
-
-	Distributor distributor;
-	String planeId;
 	
-	/*
-	 * 
+	/** The distributor. */
+	Distributor distributor;
+	
+	/** The airplane. */
+	Airplane airplane;
+//	public static Semaphore planeCreationMtx = new Semaphore(1);
+	
+	/**
 	 * Constructor of AirPlane class.
 	 * Stablishes the distributor and the planeId.
-	 * 
+	 *
 	 * @param distributor To know where to ask permissions.
-	 * @param planeId     To know which plane it is.
-	 * 
 	 */
 	
-	public AirPlane(Distributor distributor, String planeId) {
+	public AirPlane(Distributor distributor) {
 		super();
-		this.distributor = distributor;
-		this.planeId = planeId;
+		this.distributor = distributor;		
 	}
 
 	
-	/*
+	/**
 	 * 
 	 * To run the airplane execution simulation.
 	 * Step 1. Ask for landing lane.
@@ -35,59 +38,68 @@ public class AirPlane implements Runnable {
 	 * Step 9. Releases take off lane.
 	 * 
 	 */
+
 	
 	@Override
 	public void run() {
 		
 		long time = 0;
+		/*--------------------------PLANE CREATION-----------------------*/
+		/*We need to create the planes in a exclusive way, because in the database we can only do one insert in the same moment*/
+		airplane = distributor.createPlaneInExclusiveWay();
+		/*------------------------------------------------------------------*/
 		
-		
-		while ((time = distributor.askForLandingLane(planeId)) > 0) {
+		while ((time = distributor.askForLandingLane(this.airplane.getAirplaneId())) > 0) {
 			
-			//goToBed(time);
+			goToBed(time);
 		
 		}
 		
-		if (!distributor.askForLandingCurve(planeId)) System.err.println("Landing Curve");
+		goToBed(8000);//landing lane
+		
+		if (!distributor.askForLandingCurve(this.airplane.getAirplaneId())) System.err.println("Landing Curve");
+		
+		goToBed(4000);
 		
 		
-		AircraftParking acp = distributor.askForTerminal(planeId);
+		AircraftParking acp = distributor.askForTerminal(this.airplane.getAirplaneId());
 		
 		
 		for (int n = 1; n <= acp.getTerminal(); n++) {
 			
-			if (!distributor.askForLandingIntermediate(n, planeId)) System.err.println("Landing Intermediate");
-			
+			if (!distributor.askForLandingIntermediate(n, this.airplane.getAirplaneId())) System.err.println("Landing Intermediate");
+			goToBed(2000);
 			if (n > 1) {
 				if (!distributor.releaseLandingIntermediate(n - 1)) System.err.println("Releasing Landing Intermediate");
 			}
 		}
 		
-		if (!distributor.askForTermLine(acp.getTerminal(), planeId)) System.err.println("Terminal line");
+		if (!distributor.askForTermLine(acp.getTerminal(), this.airplane.getAirplaneId())) System.err.println("Terminal line");
 		if (!distributor.releaseLandingIntermediate(acp.getTerminal())) System.err.println("Releasing Landing Intermediate");
 		
 		if (!distributor.releaseTermLine(acp.getTerminal())) System.err.println("Releasing Terminal line");
 		
-		/*
+		/**
 		 * 
 		 * Plane in terminal
 		 * 
 		 */
 		
-		System.out.println(planeId + " is resting...");
+		System.out.println(String.valueOf(this.airplane.getAirplaneId()) + " is resting...");
 
-		//goToBed(200);
+		goToBed(20000);
 		
-		if (!distributor.askForTermLine(acp.getTerminal(), planeId)) System.err.println("Terminal line");
+		if (!distributor.askForTermLine(acp.getTerminal(), this.airplane.getAirplaneId())) System.err.println("Terminal line");
 		if (!distributor.releaseTerminal(acp)) System.err.println("Release Terminal line");
 		
 		
 		for (int n = acp.getTerminal(); n <= 3; n++) {
 			
-			if (!distributor.askForToIntermediate(n, planeId)) System.err.println("Landing Intermediate");
+			if (!distributor.askForToIntermediate(n, this.airplane.getAirplaneId())) System.err.println("Landing Intermediate");
 			
 			if (n > acp.getTerminal()) {
 				if (!distributor.releaseToIntermediate(n - 1)) System.err.println("Releasing Landing Intermediate");
+				goToBed(2000);
 			} else {
 				if (!distributor.releaseTermLine(acp.getTerminal())) System.err.println("Releasing Terminal line");
 			}
@@ -95,15 +107,19 @@ public class AirPlane implements Runnable {
 		
 		//goToBed(1000);
 		
-		if (!distributor.askForToCurve(planeId)) System.err.println("Take off curve");
+		if (!distributor.askForToCurve(this.airplane.getAirplaneId())) System.err.println("Take off curve");
+		goToBed(4000);
 		
-		if (!distributor.askForTakeOffLane(planeId)) System.err.println("Take off line");
-		if (!distributor.releaseTakeOffLane()) System.err.println("Take off line");
+		if (!distributor.askForTakeOffLane(this.airplane.getAirplaneId())) System.err.println("Take off line");
+		goToBed(8000);
+		if (!distributor.releaseTakeOffLane(this.airplane.getAirplaneId())) System.err.println("Take off line");
 		
-		
+		Main.airplanesNumberInAirport.release();
 	}
 	
-	/*
+
+
+	/**
 	 * 
 	 * To stop execution to simulate waitings.
 	 * 
@@ -115,9 +131,7 @@ public class AirPlane implements Runnable {
 		try {
 			Thread.sleep(time);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
 }

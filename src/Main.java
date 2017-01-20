@@ -1,20 +1,39 @@
+/*
+ * 
+ */
+import java.util.concurrent.Semaphore;
 
+/**
+ * This main is the simulator for testing Heathrow Airport distribution synchronization.
+ * First of all, initialize the Distributor of planes.
+ * Then, creates and starts the threads to simulate the planes.
+ */
 public class Main {
-	/*
-	 * This main is the simulator for testing Heathrow Airport distribution synchronization.
-	 * First of all, initialize the Distributor of planes.
-	 * Then, creates and starts the threads to simulate the planes.
-	 * 
-	 * @param args For input information at the start.
-	 * 
+	
+	/** The airplanes number in airplane. */
+	public static Semaphore airplanesNumberInAirport = new Semaphore(6);
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		
-		Distributor distributor = new Distributor(1);
 		
-		for (int i = 0; i < 50; i++) {
-			Thread thread = new Thread(new AirPlane(distributor, "plane" + i));
-			thread.start();
+		Distributor distributor = new Distributor(1);
+		Thread thread=null;
+		
+		while(true) {
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if(Main.airplanesNumberInAirport.tryAcquire()){
+				thread = new Thread(new AirPlane(distributor));
+				thread.start();
+			}
 		}
 	}
 
